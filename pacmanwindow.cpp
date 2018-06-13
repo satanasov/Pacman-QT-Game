@@ -1,5 +1,5 @@
-#include "Pacmanwindow.h"
-#include "ui_Pacmanwindow.h"
+#include "pacmanwindow.h"
+#include "ui_pacmanwindow.h"
 #include <QThread>
 #include <QtWidgets>
 #include "options.h"
