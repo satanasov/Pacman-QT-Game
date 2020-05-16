@@ -2,6 +2,7 @@
 #include "options.h"
 #include "ui_options.h"
 #include "pacmanwindow.h"
+#include "leaderboard.h"
 #include <QDebug>
 
 
@@ -28,27 +29,32 @@ Options::~Options()
 void Options::on_startButton_clicked()
 {
     int temp = ui->nameText->toPlainText().size();
-if (difficulty == 0 || ui->nameText->toPlainText() == "")
-{
-QMessageBox::warning(this,"Warning","You haven't filled in all criteria");
-if (temp > 9)
-{
-    QMessageBox::warning(this,"Warning","Only 9 characters allowed in the name");
+    if (difficulty == 0 || ui->nameText->toPlainText() == "")
+    {
+        QMessageBox::warning(this,"Warning","You haven't filled in all criteria");
+        if (temp > 9)
+        {
+            QMessageBox::warning(this,"Warning","Only 9 characters allowed in the name");
 
+        }
+    }
+    else {
+        Pacmanwindow *w = new Pacmanwindow;
+
+        QString nametemp = ui->nameText->toPlainText();
+
+        w->parseMessage(nametemp, difficulty);
+
+        w->show();
+        this->close();
+    }
 }
-}
-else {
-Pacmanwindow *w = new Pacmanwindow;
 
-QString nametemp = ui->nameText->toPlainText();
-
-w->parseMessage(nametemp, difficulty);
-
+void Options::on_leaderBoard_clicked()
+{
+    LeaderBoard *w = new LeaderBoard;
     w->show();
-    this->close();
 }
-}
-
 
 // When a radio button is pressed set the current number to the point that was pressed.
 void Options::on_easyButton_toggled(bool )
