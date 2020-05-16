@@ -1,14 +1,4 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2014-12-15T15:50:14
-#
-#-------------------------------------------------
-
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
-
-QT    += gui
+QT       += core gui sql
 
 TARGET = soft336PacmanGame
 TEMPLATE = app
@@ -21,6 +11,7 @@ SOURCES += main.cpp\
     pacmanboard.cpp \
     options.cpp \
     powerball.cpp \
+    sqlwraper.cpp \
     textdrawing.cpp \
     pacmanwindow.cpp \
     pacman.cpp
@@ -32,6 +23,7 @@ HEADERS  += \
     pacmanboard.h \
     options.h \
     powerball.h \
+    sqlwraper.h \
     textdrawing.h \
     pacmanwindow.h \
     pacman.h
