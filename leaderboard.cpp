@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QtWidgets>
 #include "options.h"
+#include "sqlwraper.h"
 
 
 LeaderBoard::LeaderBoard(QWidget *parent) :
@@ -14,7 +15,10 @@ LeaderBoard::LeaderBoard(QWidget *parent) :
                image->setPixmap( QPixmap( "paclogo.jpg" ) );
                image->show();
             ui->setupUi(this);
+        SQLWrapper *sql = new SQLWrapper();
+        sql->addDB();
     }
+
 
 LeaderBoard::~LeaderBoard()
 {
