@@ -17,6 +17,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
     ball.cpp \
     ghost.cpp \
+    leaderboard.cpp \
     pacmanboard.cpp \
     options.cpp \
     powerball.cpp \
@@ -27,6 +28,7 @@ SOURCES += main.cpp\
 HEADERS  += \
     ball.h \
     ghost.h \
+    leaderboard.h \
     pacmanboard.h \
     options.h \
     powerball.h \
@@ -35,6 +37,7 @@ HEADERS  += \
     pacman.h
 
 FORMS    += \
+    leaderboard.ui \
     pacmanwindow.ui \
     options.ui
 
