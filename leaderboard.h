@@ -5,8 +5,12 @@
 #include <QtCore>
 #include <QtGui>
 #include <QSound>
+#include <QPainter>
 #include <QSoundEffect>
 #include <QShortcut>
+#include <QGraphicsItem>
+#include <QGraphicsScene>
+#include "textdrawing.h"
 
 
 namespace Ui {
@@ -21,12 +25,16 @@ class LeaderBoard : public QWidget
         explicit LeaderBoard(QWidget *parent = 0);
         ~LeaderBoard();
         QString msg;
-    //private slots:
+        TextDrawing *text;
+        void populate();
+    private slots:
+        void on_backBtn_clicked();
 
 
 
     private:
      Ui::LeaderBoard *ui;
+     QGraphicsScene *scene;
 };
 
 
