@@ -54,6 +54,7 @@ void Options::on_leaderBoard_clicked()
 {
     LeaderBoard *w = new LeaderBoard;
     w->show();
+    this->close();
 }
 
 // When a radio button is pressed set the current number to the point that was pressed.
