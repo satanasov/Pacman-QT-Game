@@ -72,8 +72,11 @@ int SQLWrapper::getHighestScore(int dificulty)
 {
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
+    int answer = 0;
     query.exec("SELECT score FROM results WHERE dificulty = " + QString("%1").arg(dificulty) + " ORDER BY score DESC LIMIT 1");
-    int answer = query.value(0).toInt();
+    while (query.next()) {
+         answer = query.value(0).toInt();
+    }
 
     return answer;
 }
