@@ -68,11 +68,18 @@ Pacmanwindow::Pacmanwindow(QWidget *parent) :
 
 }
 
-// A Method used to store the name and difficulty parsed from options
-void Pacmanwindow::parseMessage(QString name, int temp){
+/**
+ * Set player name, difficulty and bestscore.
+ * @brief Pacmanwindow::parseMessage
+ * @param name
+ * @param temp
+ * @param bestscore
+ */
+void Pacmanwindow::parseMessage(QString name, int temp, int bestscore){
 
     this->name = name;
     ui->scoreLabel->setText(name + "'s Score");
+    ui->highScroreLcdNumber_2->display(bestscore);
     difficulty = temp;
 }
 

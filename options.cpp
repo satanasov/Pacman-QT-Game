@@ -3,6 +3,7 @@
 #include "ui_options.h"
 #include "pacmanwindow.h"
 #include "leaderboard.h"
+#include "sqlwraper.h"
 #include <QDebug>
 
 
@@ -39,11 +40,17 @@ void Options::on_startButton_clicked()
         }
     }
     else {
+        // Let's get our heighest score from the DB
+        SQLWrapper *sql = new SQLWrapper();
+        sql->openDB();
+        int bestscore = sql->getHighestScore(difficulty);
+
+        // And let start the new game
         Pacmanwindow *w = new Pacmanwindow;
 
         QString nametemp = ui->nameText->toPlainText();
 
-        w->parseMessage(nametemp, difficulty);
+        w->parseMessage(nametemp, difficulty, bestscore);
 
         w->show();
         this->close();

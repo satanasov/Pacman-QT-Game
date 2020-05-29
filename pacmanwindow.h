@@ -45,7 +45,7 @@ public:
     void easy();
     void medium();
     void hard();
-    void parseMessage(QString dataIn, int);
+    void parseMessage(QString dataIn, int, int);
 
 
     Pacman *pacman;
