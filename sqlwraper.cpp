@@ -3,6 +3,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QDateTime>
 #include <QDebug>
 
 
@@ -70,10 +71,17 @@ QStringList SQLWrapper::loadLeaderBoard()
 int SQLWrapper::getHighestScore(int dificulty)
 {
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query("SELECT score FROM results WHERE dificulty = " + QString("%1").arg(dificulty) + " ORDER BY score DESC LIMIT 1");
-    query.first();
+    QSqlQuery query;
+    query.exec("SELECT score FROM results WHERE dificulty = " + QString("%1").arg(dificulty) + " ORDER BY score DESC LIMIT 1");
     int answer = query.value(0).toInt();
 
     return answer;
 }
 
+void SQLWrapper::sendData(QString name, int score, int difficulty, int time)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QDateTime * timestamp = new QDateTime;
+    QSqlQuery query;
+    query.exec("INSERT INTO results (username, score, dificulty, time, timestamp) VALUES ('"+ name +"', '" + QString("%1").arg(score) +"', '" + QString("%1").arg(difficulty) +"', '" + QString("%1").arg(time) +"', '" + QString("%1").arg(timestamp->currentSecsSinceEpoch()) +"')");
+}

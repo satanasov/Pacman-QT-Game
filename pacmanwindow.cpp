@@ -3,6 +3,7 @@
 #include <QThread>
 #include <QtWidgets>
 #include "options.h"
+#include "sqlwraper.h"
 
 
 Pacmanwindow::Pacmanwindow(QWidget *parent) :
@@ -69,7 +70,7 @@ Pacmanwindow::Pacmanwindow(QWidget *parent) :
 }
 
 /**
- * Set player name, difficulty and bestscore.
+ * Set player name, difficulty and bestscore
  * @brief Pacmanwindow::parseMessage
  * @param name
  * @param temp
@@ -245,9 +246,13 @@ void Pacmanwindow::end_Game()
     scene->update();
     timer->stop();
     ghoststimer->stop();
-    score = hiscore;
+   // score = hiscore;
     score = 0;
-
+    int time = text->timeElapsed;
+    // Now we call the db
+    SQLWrapper *sql = new SQLWrapper();
+    sql->openDB();
+    sql->sendData(this->name, this->score, difficulty, time);
 }
 
 
