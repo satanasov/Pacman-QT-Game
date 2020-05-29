@@ -246,13 +246,14 @@ void Pacmanwindow::end_Game()
     scene->update();
     timer->stop();
     ghoststimer->stop();
-   // score = hiscore;
-    score = 0;
+    score = hiscore;
     int time = text->timeElapsed;
     // Now we call the db
     SQLWrapper *sql = new SQLWrapper();
     sql->openDB();
     sql->sendData(this->name, this->score, difficulty, time);
+
+    score = 0;
 }
 
 
@@ -1389,7 +1390,10 @@ void Pacmanwindow::updater()
         if(pacman->pacx==ballpoints[i].x() && pacman->pacy==ballpoints[i].y()){
             ballpoints.remove(i);
             score++;
-            hiscore = score;
+            if (score > hiscore)
+            {
+                hiscore = score;
+            }
             text->score = score;
             // Setting the scores
             ui->highScroreLcdNumber_2->display(hiscore);
