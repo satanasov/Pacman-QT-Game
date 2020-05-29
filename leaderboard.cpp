@@ -52,16 +52,17 @@ void LeaderBoard::populate()
     labels[4] = this->ui->label_8;
     labels[5] = this->ui->label_9;
 
-
+    // Connect to DB
     SQLWrapper *sql = new SQLWrapper();
     sql->openDB();
+
+    //Populate the leader board.
     QStringList answers = sql->loadLeaderBoard();
-    qDebug() << sql->loadLeaderBoard();
     for (int i = 0; i < answers.size(); ++i)
     {
         QString text;
         text.append(QString("%1").arg(i+1));
-        text.append(" ");
+        text.append(". ");
         text.append(answers.at(i).toLocal8Bit().constData());
         labels[i]->setText(text);
     }
