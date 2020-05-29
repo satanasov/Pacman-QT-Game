@@ -10,6 +10,7 @@ class SQLWrapper
         void openDB();
         void closeDB();
         QStringList loadLeaderBoard();
+        int getHighestScore(int dificulty);
 };
 
 #endif // SQLWRAPER_H

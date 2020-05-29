@@ -60,3 +60,20 @@ QStringList SQLWrapper::loadLeaderBoard()
     return answers;
 
 }
+
+/**
+ * Get highest score for dificulty
+ * @brief SQLWrapper::getHighestScore
+ * @param dificulty
+ * @return
+ */
+int SQLWrapper::getHighestScore(int dificulty)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query("SELECT score FROM results WHERE dificulty = " + QString("%1").arg(dificulty) + " ORDER BY score DESC LIMIT 1");
+    query.first();
+    int answer = query.value(0).toInt();
+
+    return answer;
+}
+
