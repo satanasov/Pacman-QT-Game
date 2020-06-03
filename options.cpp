@@ -42,7 +42,6 @@ void Options::on_startButton_clicked()
     else {
         // Let's get our heighest score from the DB
         SQLWrapper *sql = new SQLWrapper();
-        sql->openDB();
         int bestscore = sql->getHighestScore(difficulty);
 
         // And let start the new game

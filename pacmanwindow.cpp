@@ -80,6 +80,7 @@ void Pacmanwindow::parseMessage(QString name, int temp, int bestscore){
 
     this->name = name;
     ui->scoreLabel->setText(name + "'s Score");
+    this->hiscore = bestscore;
     ui->highScroreLcdNumber_2->display(bestscore);
     difficulty = temp;
 }
@@ -246,11 +247,10 @@ void Pacmanwindow::end_Game()
     scene->update();
     timer->stop();
     ghoststimer->stop();
-    score = hiscore;
+    //score = hiscore;
     int time = text->timeElapsed;
     // Now we call the db
     SQLWrapper *sql = new SQLWrapper();
-    sql->openDB();
     sql->sendData(this->name, this->score, difficulty, time);
 
     score = 0;

@@ -54,8 +54,6 @@ void LeaderBoard::populate()
 
     // Connect to DB
     SQLWrapper *sql = new SQLWrapper();
-    sql->openDB();
-
     //Populate the leader board.
     QStringList answers = sql->loadLeaderBoard();
     for (int i = 0; i < answers.size(); ++i)
