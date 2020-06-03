@@ -240,6 +240,11 @@ void Pacmanwindow::end_Game()
     scene->removeItem(ghost3);
     scene->removeItem(pac_map);
     //This displays the gameover text from the textdrawing class
+    int time = text->timeElapsed;
+    // Now we call the db
+    SQLWrapper *sql = new SQLWrapper();
+    sql->sendData(this->name, this->score, difficulty, time);
+    text->score = this->score;
     text->over=true;
     text->playing=false;
     start = false;
@@ -247,12 +252,6 @@ void Pacmanwindow::end_Game()
     scene->update();
     timer->stop();
     ghoststimer->stop();
-    //score = hiscore;
-    int time = text->timeElapsed;
-    // Now we call the db
-    SQLWrapper *sql = new SQLWrapper();
-    sql->sendData(this->name, this->score, difficulty, time);
-
     score = 0;
 }
 
@@ -1462,6 +1461,7 @@ void Pacmanwindow::updater()
 
     text->name = this->name;
     text->difficulty = difficultyText;
+    text->difficultyInt = difficulty;
 
     ball->setpoints(ballpoints);
     powerball->setpoints(Powerballpoints);

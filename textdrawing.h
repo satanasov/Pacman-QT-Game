@@ -13,7 +13,7 @@ public:
      void SetOver(bool over);
       void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
       bool over,playing,paused;
-      int x,y,w,h,score,timeElapsed;
+      int x,y,w,h,score,timeElapsed, difficultyInt;
       QString name, difficulty;
 
 
