@@ -48,8 +48,6 @@ QStringList SQLWrapper::loadLeaderBoard()
     QSqlQuery query("SELECT * FROM results ORDER BY score DESC;");
     qDebug() << query.value(0).toString();
     while (query.next()) {
-        //answers[0] = query.value(0).toString();
-        //answers->append(query.value(0).toString());
         qDebug() << query.value(0).toString();
         qDebug() << query.value(1).toString();
         qDebug() << query.value(2).toString();
@@ -73,7 +71,7 @@ int SQLWrapper::getHighestScore(int dificulty)
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     int answer = 0;
-    query.exec("SELECT score FROM results WHERE dificulty = " + QString("%1").arg(dificulty) + " ORDER BY score DESC LIMIT 1");
+    query.exec("SELECT score FROM results WHERE difficulty = " + QString("%1").arg(dificulty) + " ORDER BY score DESC LIMIT 1");
     while (query.next()) {
          answer = query.value(0).toInt();
     }
@@ -81,10 +79,62 @@ int SQLWrapper::getHighestScore(int dificulty)
     return answer;
 }
 
+/**
+ * Send data to database (name, score, dificulty, time)
+ * @brief SQLWrapper::sendData
+ * @param name
+ * @param score
+ * @param difficulty
+ * @param time
+ */
 void SQLWrapper::sendData(QString name, int score, int difficulty, int time)
 {
     QSqlDatabase db = QSqlDatabase::database();
     QDateTime * timestamp = new QDateTime;
     QSqlQuery query;
-    query.exec("INSERT INTO results (username, score, dificulty, time, timestamp) VALUES ('"+ name +"', '" + QString("%1").arg(score) +"', '" + QString("%1").arg(difficulty) +"', '" + QString("%1").arg(time) +"', '" + QString("%1").arg(timestamp->currentSecsSinceEpoch()) +"')");
+    query.exec("INSERT INTO results (username, score, difficulty, time, timestamp) VALUES ('"+ name +"', '" + QString("%1").arg(score) +"', '" + QString("%1").arg(difficulty) +"', '" + QString("%1").arg(time) +"', '" + QString("%1").arg(timestamp->currentSecsSinceEpoch()) +"')");
+}
+
+QList<QList<QString>>SQLWrapper::getRelativePosition(QString name, int score, int difficulty)
+{
+    QList<QList<QString>> response;
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    int row, all_rows, offset;
+    // Let's get the row
+    query.exec("WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" +QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp WHERE username like '"+ QString("%1").arg(name) +"' AND score = '" + QString("%1").arg(score) + "'");
+    qDebug() << "WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" +QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp WHERE username like '"+ QString("%1").arg(name) +"' AND score = '" + QString("%1").arg(score) + "'";
+    while (query.next()) {
+         row = query.value(0).toInt();
+    }
+    qDebug() << row;
+    // Now let's take all results for this difficulty
+    query.exec("WITH temp as (SELECT row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" + QString("%1").arg(difficulty)  + "') SELECT max(rownum) FROM temp");
+    qDebug() << "WITH temp as (SELECT row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" + QString("%1").arg(difficulty)  + "') SELECT max(rownum) FROM temp;";
+    while (query.next()) {
+         all_rows = query.value(0).toInt();
+    }
+    qDebug() << all_rows;
+
+    // Now let's calculate the offset (We will always be requesting 5 rows)
+    if (row < 3)
+    {
+        offset = 0;
+    }
+    else if (row >= (all_rows - 2))
+    {
+        offset = all_rows - 5;
+    }
+    else
+    {
+        offset = row - 2;
+    }
+
+    query.exec("WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty = '" + QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp LIMIT 5 OFFSET " + QString("%1").arg(offset) + ";");
+    qDebug() << "WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty = '" + QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp LIMIT 5 OFFSET " + QString("%1").arg(offset) + ";";
+    while (query.next()) {
+        response.append(QList<QString>{QString("%1").arg(query.value(0).toInt()), QString("%1").arg(query.value(1).toString()),QString("%1").arg(query.value(2).toInt()), QString("%1").arg(query.value(3).toInt())});
+    }
+
+    return response;
 }
