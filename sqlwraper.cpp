@@ -9,14 +9,14 @@
 #include <QObject>
 
 
-void SQLWrapper::openDB()
+void SQLWrapper::openDB(QString host, QString username, QString pass, QString dbname)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");;
     qDebug()<<"Let me try and connect";
-    db.setHostName("localhost");
-    db.setUserName("pacman");
-    db.setPassword("pacman1");
-    db.setDatabaseName("pacman");
+    db.setHostName(host);
+    db.setUserName(username);
+    db.setPassword(pass);
+    db.setDatabaseName(dbname);
     if (db.open())
     {
         qDebug()<<"DB Is HERE!!!!";
@@ -64,7 +64,7 @@ QStringList SQLWrapper::loadLeaderBoard()
         QString text = query.value(2).toString() + " " + query.value(1).toString();
         answers<<text;
     }
-
+    qDebug() << answers;
     return answers;
 
 }

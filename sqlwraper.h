@@ -9,7 +9,7 @@
 class SQLWrapper
 {
     public:
-        void openDB();
+        void openDB(QString hostname, QString username, QString password, QString dbname);
         void closeDB();
         QPalette pallett;
         QStringList loadLeaderBoard();
