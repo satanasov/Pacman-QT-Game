@@ -432,14 +432,14 @@ void Pacmanwindow::ghostsmove()
     }else{
 
         //Changing direction dependant on where pacman is located
-        if(ghostdir==4 && gosy<pacy || ghostdir==1 && gosy>pacy){
+        if((ghostdir==4 && gosy<pacy) || (ghostdir==1 && gosy>pacy)){
             if(ghostdir==1 && gosy>pacy){
                 nextghostdir=2;
             }else if(ghostdir==4 &&gosy<pacy){
                 nextghostdir=3;
             }
 
-        }else if(ghostdir==3 && gosx<pacx || ghostdir==2 && gosx>pacx){
+        }else if((ghostdir==3 && gosx<pacx) || (ghostdir==2 && gosx>pacx)){
             if(ghostdir==2 && gosx>pacx){
                 nextghostdir=1;
             }else if(ghostdir==3 && gosx<pacx){
@@ -586,14 +586,14 @@ void Pacmanwindow::ghostsmove1()
         ghostdir1=(qrand()%4)+1; // when ghost colides with wall randomly select direction
     }else{
         //nextghostdir=(qrand()%4)+1;
-        if(ghostdir1==4 && gosy1<pacy || ghostdir1==1 && gosy1>pacy){
+        if((ghostdir1==4 && gosy1<pacy) || (ghostdir1==1 && gosy1>pacy)){
             if(ghostdir1==1 && gosy>pacy){
                 nextghostdir1=2;
             }else if(ghostdir1==4 &&gosy1<pacy){
                 nextghostdir1=3;
             }
 
-        }else if(ghostdir1==3 && gosx1<pacx || ghostdir1==2 && gosx1>pacx){
+        }else if((ghostdir1==3 && gosx1<pacx) || (ghostdir1==2 && gosx1>pacx)){
             if(ghostdir1==2 && gosx1>pacx){
                 nextghostdir1=1;
             }else if(ghostdir1==3 && gosx1<pacx){
@@ -740,14 +740,14 @@ void Pacmanwindow::ghostsmove2()
         ghostdir2=(qrand()%4)+1;
     }else{
         //nextghostdir=(qrand()%4)+1;
-        if(ghostdir2==4 &&gosy2<pacy || ghostdir2==1 && gosy2>pacy){
+        if((ghostdir2==4 &&gosy2<pacy) || (ghostdir2==1 && gosy2>pacy)){
             if(ghostdir2==1 && gosy2>pacy){
                 nextghostdir2=2;
             }else if(ghostdir2==4 &&gosy2<pacy){
                 nextghostdir2=3;
             }
 
-        }else if(ghostdir2==3 && gosx2<pacx || ghostdir2==2 && gosx2>pacx){
+        }else if((ghostdir2==3 && gosx2<pacx) || (ghostdir2==2 && gosx2>pacx)){
             if(ghostdir2==2 && gosx2>pacx){
                 nextghostdir2=1;
             }else if(ghostdir2==3 && gosx2<pacx){
@@ -895,14 +895,14 @@ void Pacmanwindow::ghostsmove3()
         ghostdir3=(qrand()%4)+1;
     }else{
         //nextghostdir=(qrand()%4)+1;
-        if(ghostdir3==4 &&gosy3<pacy || ghostdir3==1 && gosy3>pacy){
+        if((ghostdir3==4 &&gosy3<pacy) || (ghostdir3==1 && gosy3>pacy)){
             if(ghostdir3==1 && gosy3>pacy){
                 nextghostdir3=2;
             }else if(ghostdir3==4 &&gosy3<pacy){
                 nextghostdir3=3;
             }
 
-        }else if(ghostdir3==3 && gosx3<pacx || ghostdir3==2 && gosx3>pacx){
+        }else if((ghostdir3==3 && gosx3<pacx) || (ghostdir3==2 && gosx3>pacx)){
             if(ghostdir3==2 && gosx3>pacx){
                 nextghostdir3=1;
             }else if(ghostdir3==3 && gosx3<pacx){
