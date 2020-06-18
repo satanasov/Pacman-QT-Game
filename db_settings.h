@@ -29,6 +29,7 @@ class DB_Settings : public QWidget
         void populate();
     private slots:
         void on_backBtn_clicked();
+        void on_save_button_clicked();
 
 
 
