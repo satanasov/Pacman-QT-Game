@@ -5,6 +5,8 @@
 #include <QSqlQuery>
 #include <QDateTime>
 #include <QDebug>
+#include <QMessageBox>
+#include <QObject>
 
 
 void SQLWrapper::openDB()
@@ -13,7 +15,7 @@ void SQLWrapper::openDB()
     qDebug()<<"Let me try and connect";
     db.setHostName("localhost");
     db.setUserName("pacman");
-    db.setPassword("pacman");
+    db.setPassword("pacman1");
     db.setDatabaseName("pacman");
     if (db.open())
     {
@@ -21,8 +23,15 @@ void SQLWrapper::openDB()
     }
     else
     {
+        // So if we are not connected - display error message.
         if (db.lastError().isValid()) {
-            qDebug() << "Error loading database:" << db.lastError();
+            QWidget *test = new QWidget();
+            QPalette pallette;
+            pallette.setColor(QPalette::Background, Qt::black);
+            QMessageBox *error = new QMessageBox;
+            error->setPalette(pallette);
+            QString text = db.lastError().text();
+            error->about(test, QObject::tr("DB Error detected"), QObject::tr(qPrintable(text)));
         }
     }
 
