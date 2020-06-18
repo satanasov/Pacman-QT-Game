@@ -4,6 +4,7 @@
 #include "pacmanwindow.h"
 #include "leaderboard.h"
 #include "sqlwraper.h"
+#include "db_settings.h"
 #include <QDebug>
 
 
@@ -56,6 +57,10 @@ void Options::on_startButton_clicked()
     }
 }
 
+/**
+ * Manage clicking on leaderboard
+ * @brief Options::on_leaderBoard_clicked
+ */
 void Options::on_leaderBoard_clicked()
 {
     LeaderBoard *w = new LeaderBoard;
@@ -63,6 +68,13 @@ void Options::on_leaderBoard_clicked()
     this->close();
 }
 
+
+void Options::on_dbSettings_clicked()
+{
+    DB_Settings *db = new DB_Settings;
+    db->show();
+    this->close();
+}
 // When a radio button is pressed set the current number to the point that was pressed.
 void Options::on_easyButton_toggled(bool )
 {

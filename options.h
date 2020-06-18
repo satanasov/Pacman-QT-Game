@@ -27,6 +27,8 @@ class Options : public QWidget
 
         void on_leaderBoard_clicked();
 
+        void on_dbSettings_clicked();
+
         void on_easyButton_toggled(bool checked);
 
         void on_mediumButton_toggled(bool checked);
