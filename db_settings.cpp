@@ -42,13 +42,11 @@ void DB_Settings::on_save_button_clicked()
     QString DB_USER = ui->db_username_input->toPlainText();
     QString DB_PASS = ui->db_password_input->toPlainText();
     QString DB_NAME = ui->db_name_input->toPlainText();
-    qDebug() << DB_HOST;
     settings.setValue("DB_HOST", DB_HOST);
-    settings.setValue("DB_USER", DB_HOST);
-    settings.setValue("DB_PASS", DB_HOST);
-    settings.setValue("DB_NAME", DB_HOST);
+    settings.setValue("DB_USER", DB_USER);
+    settings.setValue("DB_PASS", DB_PASS);
+    settings.setValue("DB_NAME", DB_NAME);
 
-    qDebug() << m_sSettingsFile;
 }
 
 /**
