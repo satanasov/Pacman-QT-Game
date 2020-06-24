@@ -76,7 +76,11 @@ void Options::on_leaderBoard_clicked()
     this->close();
 }
 
-
+/**
+ * Let's go to Database settings
+ *
+ * @brief Options::on_dbSettings_clicked
+ */
 void Options::on_dbSettings_clicked()
 {
     DB_Settings *db = new DB_Settings;

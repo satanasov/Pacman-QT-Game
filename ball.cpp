@@ -1,5 +1,9 @@
 #include "ball.h"
 
+/**
+ * Define ball parameters and invoce draw
+ * @brief Ball::Ball
+ */
 Ball::Ball()
 {
     ballx=0;
@@ -40,6 +44,10 @@ void Ball::removepoint(QPoint p)
 
 }
 
+/**
+ * Draw the balls
+ * @brief Ball::generatePointPixmap
+ */
 void Ball::generatePointPixmap()
 {
     QRect bounds = QRect(0, 0, 3, 3);
