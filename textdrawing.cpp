@@ -69,8 +69,8 @@ void TextDrawing::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
                 painter->setPen(highPen);
             }
             painter->drawText( x+0, y-70, QString::number(result.value(0).toInt()) + ".");
-            painter->drawText( x+80, y-70, QString(result.value(1)));
-            painter->drawText( x+140,y-70, QString::number(result.value(2).toInt()));
+            painter->drawText( x+50, y-70, QString(result.value(1)));
+            painter->drawText( x+170,y-70, QString::number(result.value(2).toInt()));
             painter->drawText( x+250,y-70, QString::number(result.value(3).toInt()) + "s");
             if (results.length() > 1)
             {
@@ -87,8 +87,8 @@ void TextDrawing::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
                 }
 
                 painter->drawText( x+0, y-50, QString::number(result.value(0).toInt()) + ".");
-                painter->drawText( x+80, y-50, QString(result.value(1)));
-                painter->drawText( x+140,y-50, QString::number(result.value(2).toInt()));
+                painter->drawText( x+50, y-50, QString(result.value(1)));
+                painter->drawText( x+170,y-50, QString::number(result.value(2).toInt()));
                 painter->drawText( x+250,y-50, QString::number(result.value(3).toInt()) + "s");
             }
             if (results.length() > 2)
@@ -106,8 +106,8 @@ void TextDrawing::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
                 }
 
                 painter->drawText( x+0, y-30, QString::number(result.value(0).toInt()) + ".");
-                painter->drawText( x+80, y-30, QString(result.value(1)));
-                painter->drawText( x+140,y-30, QString::number(result.value(2).toInt()));
+                painter->drawText( x+50, y-30, QString(result.value(1)));
+                painter->drawText( x+170,y-30, QString::number(result.value(2).toInt()));
                 painter->drawText( x+250,y-30, QString::number(result.value(3).toInt()) + "s");
             }
             if (results.length() > 3)
@@ -125,8 +125,8 @@ void TextDrawing::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
                 }
 
                 painter->drawText( x+0, y-10, QString::number(result.value(0).toInt()) + ".");
-                painter->drawText( x+80, y-10, QString(result.value(1)));
-                painter->drawText( x+140,y-10, QString::number(result.value(2).toInt()));
+                painter->drawText( x+50, y-10, QString(result.value(1)));
+                painter->drawText( x+170,y-10, QString::number(result.value(2).toInt()));
                 painter->drawText( x+250,y-10, QString::number(result.value(3).toInt()) + "s");
             }
             if (results.length() > 4)
@@ -144,8 +144,8 @@ void TextDrawing::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
                 }
 
                 painter->drawText( x+0, y+10, QString::number(result.value(0).toInt()) + ".");
-                painter->drawText( x+80, y+10, QString(result.value(1)));
-                painter->drawText( x+140,y+10, QString::number(result.value(2).toInt()));
+                painter->drawText( x+50, y+10, QString(result.value(1)));
+                painter->drawText( x+170,y+10, QString::number(result.value(2).toInt()));
                 painter->drawText( x+250,y+10, QString::number(result.value(3).toInt()) + "s");
             }
             //painter->drawText( x+80,y-300, "Press Space to play again" );
