@@ -39,7 +39,6 @@ void LeaderBoard::on_backBtn_clicked()
 /**
  * Function that should populate the leader board
  *
- * TODO: Make leaderboard work with all corect requests.
  * @brief LeaderBoard::populate
  */
 void LeaderBoard::populate()
