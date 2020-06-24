@@ -15,7 +15,8 @@ void SQLWrapper::openDB(QString host, QString username, QString pass, QString db
     qDebug()<<"Let me try and connect";
     db.setHostName(host);
     db.setUserName(username);
-    db.setPassword(pass);
+    //db.setPassword(pass);
+    db.setPassword(QString("pacmmm"));
     db.setDatabaseName(dbname);
     if (db.open())
     {
@@ -41,6 +42,52 @@ void SQLWrapper::openDB(QString host, QString username, QString pass, QString db
 void SQLWrapper::closeDB()
 {
 
+}
+
+/**
+ * Expose isOpe() for DB object
+ * @brief SQLWrapper::isConValid
+ * @return
+ */
+bool SQLWrapper::isConValid()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    if (db.isOpen())
+    {
+        return true;
+    }
+    return false;
+}
+
+
+/**
+ * Check if table exists
+ * @brief SQLWrapper::isStructValid
+ * @return
+ */
+bool SQLWrapper::isStructValid()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    qDebug() << db.tables();
+    if (db.tables().contains( QString("results"))) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Expose lastError()
+ * @brief SQLWrapper::getError
+ * @return
+ */
+QString SQLWrapper::getError()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    if(db.lastError().isValid())
+    {
+        return QString(db.lastError().text());
+    }
+    return QString("No Errors");
 }
 
 /**

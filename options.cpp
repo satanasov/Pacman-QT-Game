@@ -41,9 +41,17 @@ void Options::on_startButton_clicked()
         }
     }
     else {
+        int bestscore = 0;
         // Let's get our heighest score from the DB
         SQLWrapper *sql = new SQLWrapper();
-        int bestscore = sql->getHighestScore(difficulty);
+        if (!sql->isConValid()){
+            qDebug() << "NoSQL Connection";
+        }
+        else
+        {
+            bestscore = sql->getHighestScore(difficulty);
+        }
+
 
         // And let start the new game
         Pacmanwindow *w = new Pacmanwindow;

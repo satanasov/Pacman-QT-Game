@@ -64,5 +64,31 @@ void DB_Settings::populate()
     ui->db_username_input->setPlainText(DB_USER);
     ui->db_password_input->setPlainText(DB_PASS);
     ui->db_name_input->setPlainText(DB_NAME);
+
+    SQLWrapper *sql = new SQLWrapper();
+    if (sql->isConValid())
+    {
+        ui->db_connection_state->setPixmap(QPixmap(":/images/ok.png").scaled(31, 29));
+        ui->db_connection_state->setToolTip(QString("Database Connection OK!!!!"));
+        if(sql->isStructValid())
+        {
+            ui->db_table_state->setPixmap(QPixmap(":/images/ok.png").scaled(31, 29));
+            ui->db_table_state->setToolTip(QString("Table exists ..."));
+        }
+        else
+        {
+            ui->db_table_state->setPixmap(QPixmap(":/images/error.png").scaled(31, 29));
+            ui->db_table_state->setToolTip(QString("Table DOES NOT exist ..."));
+        }
+    }
+    else
+    {
+        ui->db_connection_state->setPixmap(QPixmap(":/images/error.png").scaled(31, 29));
+        QString error = sql->getError();
+        ui->db_connection_state->setToolTip(error);
+        ui->db_table_state->setPixmap(QPixmap(":/images/error.png").scaled(31, 29));
+        ui->db_table_state->setToolTip(QString("Table is in Schrödinger state - wile not connected to DB it both exists and doesn't exist."));
+    }
+
 }
 

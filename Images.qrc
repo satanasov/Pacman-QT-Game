@@ -59,5 +59,7 @@
         <file>images/die7.png</file>
         <file>images/die8.png</file>
         <file>images/die9.png</file>
+        <file>images/ok.png</file>
+        <file>images/error.png</file>
     </qresource>
 </RCC>
