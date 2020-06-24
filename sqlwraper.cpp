@@ -50,19 +50,22 @@ void SQLWrapper::closeDB()
  * @return QStringList
  */
 
-QStringList SQLWrapper::loadLeaderBoard()
+QList<QList<QString>> SQLWrapper::loadLeaderBoard()
 {
-    QStringList answers;
+    QList<QList<QString>> answers;
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query("SELECT * FROM results ORDER BY score DESC;");
+    QSqlQuery query("SELECT * FROM results ORDER BY score DESC LIMIT 6;");
     qDebug() << query.value(0).toString();
     while (query.next()) {
-        qDebug() << query.value(0).toString();
-        qDebug() << query.value(1).toString();
-        qDebug() << query.value(2).toString();
-        qDebug() << query.value(3).toString();
-        QString text = query.value(2).toString() + " " + query.value(1).toString();
-        answers<<text;
+        qDebug() << query.value(5);
+        QList<QString> a;
+        a.append(QString("%1").arg(query.value(0).toInt()));
+        a.append(QString("%1").arg(query.value(1).toString()));
+        a.append(QString("%1").arg(query.value(2).toInt()));
+        a.append(QString("%1").arg(query.value(3).toInt()));
+        a.append(QString("%1").arg(query.value(4).toInt()));
+        a.append(QString("%1").arg(query.value(5).toInt()));
+        answers.append(a);
     }
     qDebug() << answers;
     return answers;
@@ -120,7 +123,7 @@ QList<QList<QString>>SQLWrapper::getRelativePosition(QString name, int score, in
     int row, all_rows, offset;
     // Let's get the row
     query.exec("WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" +QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp WHERE username like '"+ QString("%1").arg(name) +"' AND score = '" + QString("%1").arg(score) + "'");
-    qDebug() << "WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" +QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp WHERE username like '"+ QString("%1").arg(name) +"' AND score = '" + QString("%1").arg(score) + "'";
+    //qDebug() << "WITH temp as (SELECT username, score, time, row_number() OVER (ORDER BY score DESC, timestamp DESC) as rownum FROM results WHERE difficulty='" +QString("%1").arg(difficulty)  + "') SELECT rownum, username, score, time FROM temp WHERE username like '"+ QString("%1").arg(name) +"' AND score = '" + QString("%1").arg(score) + "'";
     while (query.next()) {
          row = query.value(0).toInt();
     }
