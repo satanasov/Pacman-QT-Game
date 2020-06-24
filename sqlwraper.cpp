@@ -46,7 +46,7 @@ void SQLWrapper::closeDB()
 }
 
 /**
- * Expose isOpe() for DB object
+ * Expose isOpen() for DB object
  * @brief SQLWrapper::isConValid
  * @return
  */

@@ -36,6 +36,11 @@ void DB_Settings::on_backBtn_clicked()
     this->close();
 }
 
+/**
+ * Action for save button.
+ * Save settings to settigs and test new connection
+ * @brief DB_Settings::on_save_button_clicked
+ */
 void DB_Settings::on_save_button_clicked()
 {
     QSettings settings("Anavaro", "PacMan");
@@ -57,6 +62,12 @@ void DB_Settings::on_save_button_clicked()
 
 }
 
+
+/**
+ * DB Deploy button
+ * If we have connection but we don't have the table - deplay the table.
+ * @brief DB_Settings::on_installDBBtn_clicked
+ */
 void DB_Settings::on_installDBBtn_clicked()
 {
 
@@ -88,7 +99,11 @@ void DB_Settings::populate()
     this->checkState();
 
 }
-
+/**
+ * Private function that is related to graphics on this screen
+ * Display OK and Error images on states
+ * @brief DB_Settings::checkState
+ */
 void DB_Settings::checkState()
 {
     if (this->sql->isConValid())
