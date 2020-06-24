@@ -15,8 +15,8 @@ void SQLWrapper::openDB(QString host, QString username, QString pass, QString db
     qDebug()<<"Let me try and connect";
     db.setHostName(host);
     db.setUserName(username);
-    //db.setPassword(pass);
-    db.setPassword(QString("pacmmm"));
+    db.setPassword(pass);
+    //db.setPassword(QString("pacmmm"));
     db.setDatabaseName(dbname);
     if (db.open())
     {
@@ -41,7 +41,8 @@ void SQLWrapper::openDB(QString host, QString username, QString pass, QString db
 
 void SQLWrapper::closeDB()
 {
-
+    QSqlDatabase db = QSqlDatabase::database();
+    db.close();
 }
 
 /**
@@ -88,6 +89,27 @@ QString SQLWrapper::getError()
         return QString(db.lastError().text());
     }
     return QString("No Errors");
+}
+
+
+void SQLWrapper::deployTable()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+
+    if (!this->isStructValid())
+    {
+        QSqlQuery query;
+        //Let's start with the sequence (This is row ID for scores)
+        //First drop if we have some
+        query.exec("DROP SEQUENCE score_id IF EXISTS;");
+        //Now create
+        query.exec("CREATE SEQUENCE score_id START 1;");
+        //Now create the db
+        // But first we drop it
+        query.exec("DROP TABLE IF EXISTS results");
+        // Now we create the table
+        query.exec("CREATE TABLE results (id integer PRIMARY KEY DEFAULT nextval('score_id'), username text NOT NULL, score bigint NOT NULL, timestamp text NOT NULL, difficulty integer NOT NULL DEFAULT 1, time integer NOT NULL DEFAULT 0);");
+    }
 }
 
 /**

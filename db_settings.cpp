@@ -16,6 +16,7 @@ DB_Settings::DB_Settings(QWidget *parent) :
                image->show();
             ui->setupUi(this);
             this->populate();
+
     }
 
 
@@ -47,6 +48,25 @@ void DB_Settings::on_save_button_clicked()
     settings.setValue("DB_PASS", DB_PASS);
     settings.setValue("DB_NAME", DB_NAME);
 
+    // Restart DB connection with new parameters
+
+    this->sql->closeDB();
+    this->sql->openDB(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+    this->checkState();
+
+}
+
+void DB_Settings::on_installDBBtn_clicked()
+{
+
+    this->sql->deployTable();
+    if (this->sql->isStructValid())
+    {
+        ui->db_table_state->setPixmap(QPixmap(":/images/ok.png").scaled(31, 29));
+        ui->db_table_state->setToolTip(QString("Table exists ..."));
+        ui->installDBBtn->setEnabled(false);
+    }
 }
 
 /**
@@ -65,12 +85,17 @@ void DB_Settings::populate()
     ui->db_password_input->setPlainText(DB_PASS);
     ui->db_name_input->setPlainText(DB_NAME);
 
-    SQLWrapper *sql = new SQLWrapper();
-    if (sql->isConValid())
+    this->checkState();
+
+}
+
+void DB_Settings::checkState()
+{
+    if (this->sql->isConValid())
     {
         ui->db_connection_state->setPixmap(QPixmap(":/images/ok.png").scaled(31, 29));
         ui->db_connection_state->setToolTip(QString("Database Connection OK!!!!"));
-        if(sql->isStructValid())
+        if(this->sql->isStructValid())
         {
             ui->db_table_state->setPixmap(QPixmap(":/images/ok.png").scaled(31, 29));
             ui->db_table_state->setToolTip(QString("Table exists ..."));
@@ -78,17 +103,16 @@ void DB_Settings::populate()
         else
         {
             ui->db_table_state->setPixmap(QPixmap(":/images/error.png").scaled(31, 29));
-            ui->db_table_state->setToolTip(QString("Table DOES NOT exist ..."));
+            ui->db_table_state->setToolTip(QString("Table DOES NOT exist ... There should be button for this..."));
+            ui->installDBBtn->setEnabled(true);
         }
     }
     else
     {
         ui->db_connection_state->setPixmap(QPixmap(":/images/error.png").scaled(31, 29));
-        QString error = sql->getError();
+        QString error = this->sql->getError();
         ui->db_connection_state->setToolTip(error);
         ui->db_table_state->setPixmap(QPixmap(":/images/error.png").scaled(31, 29));
         ui->db_table_state->setToolTip(QString("Table is in Schrödinger state - wile not connected to DB it both exists and doesn't exist."));
     }
-
 }
-
