@@ -320,3 +320,179 @@ When pause button clicked pause the timer
 When controls buttons is clicked
 
 >* @brief Pacmanwindow::on_controlsButton_clicked
+
+### pacmanboard.cpp
+
+Used for drawing the playing fields
+
+#### QRectF PacmanBoard::boundingRect() const
+
+Return playing area size
+
+>* @brief PacmanBoard::boundingRect
+>* @return
+
+#### void PacmanBoard::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+
+> * @brief PacmanBoard::paint
+> * @param painter
+> * @param option
+> * @param widget
+
+#### void PacmanBoard::generateBalls()
+
+Create points on the map ... see balls?
+
+>* @brief PacmanBoard::generateBalls
+
+#### bool PacmanBoard::canmove(QPoint point)
+
+This creates a path behind pacman
+
+> * @brief PacmanBoard::canmove
+
+#### void PacmanBoard::fillpacpoints(int pacx, int pacy)
+
+This draws the path behind pacman with colour, but colour is set to black
+
+> * @brief PacmanBoard::fillpacpoints
+> * @param pacx
+> * @param pacy
+
+#### void PacmanBoard::setballpoints(QVector<QPoint> points)
+
+set points for the balls
+
+#### void PacmanBoard::setpowerballpoints(QVector<QPoint> points)
+
+Set points for the power balls
+
+#### void PacmanBoard::AddPathPoints(int x1, int y1, int x2, int y2)
+
+This locates where the points are behind pacman and push them to front.
+
+>* @brief PacmanBoard::AddPathPoints
+> * @param x1
+> * @param y1
+> * @param x2
+> * @param y2
+
+#### QVector<QPoint> PacmanBoard::getballpoints()
+
+#### QVector<QPoint> PacmanBoard::getpowerballpoints()
+
+### pacman.cpp
+
+This creates the Pacman
+
+#### QRectF Pacman::boundingRect() const
+
+Pacman constraint
+
+#### void Pacman::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+
+paint pacman
+
+#### void Pacman::advance()
+
+a method used to animate pacman through the three images.
+
+> * @brief Pacman::advance
+
+#### void Pacman::deathseq()
+
+Unused method old idea
+
+#### void Pacman::setpacx(int x)
+
+Set pacman x position
+
+#### void Pacman::setpacy(int y)
+
+Set pacman y position
+
+#### Pacman::setDirection(int dir)
+
+Set movement direction
+
+#### void Pacman::setDeath(int d)
+
+Are we dead yet?
+
+### powerball.cpp
+
+Used for the powerballs
+
+#### QRectF PowerBall::boundingRect() const
+
+Powerballs constraint
+
+#### void PowerBall::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+
+Draw the powerballs
+
+#### void PowerBall::setpoints(QVector<QPoint> points)
+
+Set powerballs locations
+
+#### void PowerBall::drawballs(QPainter * painter)
+
+Make balls visible
+
+#### void PowerBall::generatePointPixmap()
+
+Generate the powerbalss image
+
+### ghost.cpp
+
+Used for drawing the ghosts
+
+#### QRectF Ghost::boundingRect() const
+
+Ghosts should have constraints, right?
+
+#### void Ghost::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+
+Paint the ghosts
+
+#### void Ghost::advance()
+
+Animate ghost
+
+#### void Ghost::setgosx(int x)
+
+Set ghost x position
+
+#### void Ghost::setgosy(int y)
+
+Set ghost y position
+
+#### void Ghost::setDirection(int dir)
+
+Set ghost direction
+
+#### void Ghost::setColor(QString col)
+
+Set ghost color ... because we have 4 of them and each should load different asset.
+
+### ball.cpp
+
+#### QRectF Ball::boundingRect() const
+
+Ball boundaries
+
+#### void Ball::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+
+Paint balls
+
+#### void Ball::drawballs(QPainter * painter)
+
+Paint balls visible
+
+#### void Ball::setpoints(QVector<QPoint> points)
+
+Set ball points
+
+#### void Ball::generatePointPixmap()
+
+Draw balls at points.

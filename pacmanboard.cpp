@@ -96,11 +96,23 @@ PacmanBoard::PacmanBoard()
     generateBalls();
 }
 
+/**
+ * Return playing area size
+ * @brief PacmanBoard::boundingRect
+ * @return
+ */
+
 QRectF PacmanBoard::boundingRect() const
 {
     return QRect(0,0,450,480); //This is how big the constraints for the map are
 }
 
+/**
+ * @brief PacmanBoard::paint
+ * @param painter
+ * @param option
+ * @param widget
+ */
 void PacmanBoard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
@@ -108,7 +120,10 @@ void PacmanBoard::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
-
+/**
+ * Create points on the map ... see balls?
+ * @brief PacmanBoard::generateBalls
+ */
 void PacmanBoard::generateBalls()
 {
 
@@ -131,7 +146,13 @@ void PacmanBoard::generateBalls()
         painter.drawEllipse(powerballpoints[i].x()-5,powerballpoints[i].y()-5,10,10);
     }
 }
-// This creates a path behind pacman
+
+/**
+ * This creates a path behind pacman
+ * @brief PacmanBoard::canmove
+ * @param point
+ * @return
+ */
 bool PacmanBoard::canmove(QPoint point)
 {
 
@@ -145,7 +166,13 @@ bool PacmanBoard::canmove(QPoint point)
 
 
 }
-// This draws the path behind pacman with colour, but colour is set to black
+
+/**
+ * This draws the path behind pacman with colour, but colour is set to black
+ * @brief PacmanBoard::fillpacpoints
+ * @param pacx
+ * @param pacy
+ */
 void PacmanBoard::fillpacpoints(int pacx, int pacy)
 {
 
@@ -174,7 +201,15 @@ void PacmanBoard::setpowerballpoints(QVector<QPoint> points)
 {
     powerball->setpoints(points);
 }
-// This locates where the points are behind pacman and push them to front.
+
+/**
+ * This locates where the points are behind pacman and push them to front.
+ * @brief PacmanBoard::AddPathPoints
+ * @param x1
+ * @param y1
+ * @param x2
+ * @param y2
+ */
 void PacmanBoard::AddPathPoints(int x1, int y1, int x2, int y2)
 {
     QPoint p;

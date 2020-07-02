@@ -120,7 +120,10 @@ void Pacman::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 //    }}
 }
 
-// a method used to animate pacman through the three images.
+/**
+ * a method used to animate pacman through the three images.
+ * @brief Pacman::advance
+ */
 void Pacman::advance()
 {
 
