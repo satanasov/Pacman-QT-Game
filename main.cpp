@@ -3,6 +3,14 @@
 #include "sqlwraper.h"
 #include <QSettings>
 
+/**
+ * Main executable function
+ * @brief main
+ * @param argc - command line paramer count
+ * @param argv - parameters passed to executable.
+ * @return
+ */
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

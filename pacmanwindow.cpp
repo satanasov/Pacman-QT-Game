@@ -85,7 +85,11 @@ void Pacmanwindow::parseMessage(QString name, int temp, int bestscore){
     difficulty = temp;
 }
 
-// A Method used to start the game both at the beginning, on new level and if there is a game over
+
+/**
+ * A Method used to start the game both at the beginning, on new level and if there is a game over
+ * @brief Pacmanwindow::start_Game
+ */
 void Pacmanwindow::start_Game()
 {
     level = 0;
@@ -164,7 +168,11 @@ void Pacmanwindow::start_Game()
 
     }
 }
-// A method used to set the difficulty
+
+/**
+ * A method used to set the difficulty
+ * @brief Pacmanwindow::easy
+ */
 void Pacmanwindow::easy(){
 // calling both timers to start the game
     timer = new QTimer(this);
@@ -187,6 +195,10 @@ void Pacmanwindow::easy(){
 
 }
 
+/**
+ * A method used to set the difficulty
+ * @brief Pacmanwindow::medium
+ */
 void Pacmanwindow::medium(){
     lives =2;
 
@@ -206,6 +218,11 @@ void Pacmanwindow::medium(){
 
 
 }
+
+/**
+ * A method used to set the difficulty
+ * @brief Pacmanwindow::hard
+ */
 void Pacmanwindow::hard(){
 
     lives = 0; // one life
@@ -225,10 +242,10 @@ void Pacmanwindow::hard(){
 
 }
 
-
-
-
-// A method called when all lives are depleated resulting in changing the values.
+/**
+ * A method called when all lives are depleated resulting in changing the values.
+ * @brief Pacmanwindow::end_Game
+ */
 void Pacmanwindow::end_Game()
 {
     starting = 0;
@@ -257,8 +274,12 @@ void Pacmanwindow::end_Game()
 
 
 
-// This code is used when one of the livess are taken.
-void Pacmanwindow::retry(){
+/**
+ * This code is used when one of the livess are taken.
+ * @brief Pacmanwindow::retry
+ */
+void Pacmanwindow::retry()
+{
 
     gosx=450/2;
     gosy=480/2;
@@ -288,7 +309,10 @@ void Pacmanwindow::retry(){
 
 }
 
-// Method for pacmans movenment and wall collisions etc..
+/**
+ * Method for pacmans movenment and wall collisions etc..
+ * @brief Pacmanwindow::pacman_move
+ */
 void Pacmanwindow::pacman_move()
 {
     QPoint p;
@@ -421,7 +445,10 @@ void Pacmanwindow::pacman_move()
 }
 
 
-/// moving ghosts around the map
+/**
+ * moving ghosts around the map
+ * @brief Pacmanwindow::ghostsmove
+ */
 void Pacmanwindow::ghostsmove()
 {
     QPoint p;
@@ -882,7 +909,7 @@ void Pacmanwindow::ghostsmove2()
 
 void Pacmanwindow::ghostsmove3()
 {
-    QPoint p,g;
+    QPoint p;
     //int ir=qrand()%ballpoints.size();
     //    QVector<QPoint> points;
 
@@ -1036,6 +1063,10 @@ void Pacmanwindow::ghostsmove3()
 }
 
 ///// Keep ghosts in rectangles
+/**
+ * Keep ghosts in rectangles
+ * @brief Pacmanwindow::moveghostsinrect3
+ */
 void Pacmanwindow::moveghostsinrect3()
 {
     if(gosx3==450/2+40 || gosx3==450/2-40){
@@ -1135,7 +1166,10 @@ void Pacmanwindow::moveghostsinrect()
 }
 
 
-// This method is used to check for collisions with the ghosts and balls
+/**
+ * This method is used to check for collisions with the ghosts and balls
+ * @brief Pacmanwindow::checklost
+ */
 void Pacmanwindow::checklost() // lost the game
 {
 
@@ -1211,8 +1245,11 @@ void Pacmanwindow::checklost() // lost the game
 
 }
 
-// A method to avoke key pressing.
-
+/**
+ * A method to avoke key pressing.
+ * @brief Pacmanwindow::keyPressEvent
+ * @param event
+ */
 void Pacmanwindow::keyPressEvent(QKeyEvent *event)
 {
 
@@ -1370,8 +1407,10 @@ int scarestate=0;
 int soundstate=0;
 int timeGame;
 
-
-// This updates the pacman with the use of timer connection
+/**
+ * This updates the pacman with the use of timer connection
+ * @brief Pacmanwindow::updater
+ */
 void Pacmanwindow::updater()
 {
 
@@ -1483,7 +1522,10 @@ pacman->advance();
 
 }
 
-// This pauses the timer.
+/**
+ * This pauses the timer.
+ * @brief Pacmanwindow::pause
+ */
 void Pacmanwindow::pause(){
     //if you are not playing do nothing.
     if (!playing)
@@ -1513,6 +1555,10 @@ void Pacmanwindow::pause(){
 }
 
 // This is an individual update for the ghosts, as they run on a seperate timer.
+/**
+ * This is an individual update for the ghosts, as they run on a seperate timer.
+ * @brief Pacmanwindow::ghostupdater
+ */
 void Pacmanwindow::ghostupdater()// updates the ghosts posistion
 {
     if(ghoststart || ghoststart1 || ghoststart2 || ghoststart3){
@@ -1583,13 +1629,19 @@ Pacmanwindow::~Pacmanwindow()
     delete ui;
 }
 
-// When pause button clicked pause the timer
+/**
+ * When pause button clicked pause the timer
+ * @brief Pacmanwindow::on_pauseButton_clicked
+ */
 void Pacmanwindow::on_pauseButton_clicked()// pauses the timer in the game
 {
     pause();
 }
 
-// When controls buttons is clicked
+/**
+ * When controls buttons is clicked
+ * @brief Pacmanwindow::on_controlsButton_clicked
+ */
 void Pacmanwindow::on_controlsButton_clicked()// Change colour to black
 {
 // make sure the game is paused.

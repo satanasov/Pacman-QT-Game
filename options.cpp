@@ -26,8 +26,11 @@ Options::~Options()
 {
     delete ui;
 }
-// When start button is pressed, error handling, setting difficulty and name to fields in main class.
 
+/**
+ * When start button is pressed, error handling, setting difficulty and name to fields in main class.
+ * @brief Options::on_startButton_clicked
+ */
 void Options::on_startButton_clicked()
 {
     int temp = ui->nameText->toPlainText().size();

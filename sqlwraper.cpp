@@ -9,6 +9,14 @@
 #include <QObject>
 
 
+/**
+ * Open DB connection
+ * @brief SQLWrapper::openDB
+ * @param host
+ * @param username
+ * @param pass
+ * @param dbname
+ */
 void SQLWrapper::openDB(QString host, QString username, QString pass, QString dbname)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");;
@@ -39,6 +47,11 @@ void SQLWrapper::openDB(QString host, QString username, QString pass, QString db
 
 }
 
+
+/**
+ * Close DB connection
+ * @brief SQLWrapper::closeDB
+ */
 void SQLWrapper::closeDB()
 {
     QSqlDatabase db = QSqlDatabase::database();
@@ -91,7 +104,10 @@ QString SQLWrapper::getError()
     return QString("No Errors");
 }
 
-
+/**
+ * Deploy table if the table is invalid
+ * @brief SQLWrapper::deployTable
+ */
 void SQLWrapper::deployTable()
 {
     QSqlDatabase db = QSqlDatabase::database();
