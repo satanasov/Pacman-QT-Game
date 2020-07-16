@@ -19,7 +19,7 @@
  */
 void SQLWrapper::openDB(QString host, QString username, QString pass, QString dbname)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     qDebug()<<"Let me try and connect";
     db.setHostName(host);
     db.setUserName(username);
